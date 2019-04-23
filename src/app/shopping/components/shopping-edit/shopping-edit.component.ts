@@ -1,9 +1,13 @@
+import {AddIngredientAction} from './../../store/actions/shopping-list/shopping-list.action';
 import { Subscription } from 'rxjs';
 import { ShoppingListService } from 'src/app/core/services/shopping-list/shopping-list.service';
 import { Ingredient } from 'src/app/shared/models/ingredient.model';
 
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Store } from '@ngrx/store';
+
+import { IShoppingListState } from '../../store/reducers/shopping-list/shopping-list.reducer';
 
 interface IFormValue {
   name: string;
@@ -27,7 +31,10 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   private _itemBeingEdited: Ingredient;
 
   constructor(
-    private _shoppingListService: ShoppingListService
+    private _shoppingListService: ShoppingListService,
+    private _store: Store<{
+      shoppingList: IShoppingListState;
+    }>
   ) { }
 
   public ngOnInit(): void {
@@ -53,7 +60,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     if (this.editMode) {
       this._shoppingListService.updateIngredient(this._itemBeingEditedIndex, newIngredient);
     } else {
-      this._shoppingListService.addIngredient(newIngredient);
+      this._store.dispatch(new AddIngredientAction(newIngredient));
     }
 
     this._shoppingListForm.reset();
