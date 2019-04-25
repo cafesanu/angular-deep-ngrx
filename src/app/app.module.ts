@@ -1,4 +1,3 @@
-import {StoreModule} from '@ngrx/store';
 import { HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -8,7 +7,6 @@ import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
 import { InitService } from './core/services/init/init.service';
 import { SharedModule } from './shared/shared.module';
-import { shoppingListReducer } from './shopping/store/reducers/shopping-list/shopping-list.reducer';
 
 export function initializeApp(initService: InitService): () => Promise<void> {
   return (): Promise<void> => {
@@ -24,10 +22,7 @@ export function initializeApp(initService: InitService): () => Promise<void> {
     HttpClientModule,
     AuthModule,
     SharedModule,
-    CoreModule,
-    StoreModule.forRoot({
-      shoppingList: shoppingListReducer
-    })
+    CoreModule
   ],
   providers: [ // services
     {

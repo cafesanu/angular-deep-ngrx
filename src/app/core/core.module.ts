@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { StoreModule } from '@ngrx/store';
 
 import { SharedModule } from '../shared/shared.module';
 import { HeaderComponent } from './components/header/header.component';
@@ -8,6 +9,7 @@ import { HomeComponent } from './components/home/home.component';
 import { CoreRoutingModule } from './core.routing-module';
 import { AuthInterceptorService } from './services/auth-interceptor/auth-interceptor.service';
 import { LoggingInterceptorService } from './services/logging-interceptor/logging-interceptor.service';
+import { coreReducers } from './store/core.reducers';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,8 @@ import { LoggingInterceptorService } from './services/logging-interceptor/loggin
   imports: [
     CommonModule,
     SharedModule,
-    CoreRoutingModule
+    CoreRoutingModule,
+    StoreModule.forRoot(coreReducers)
   ],
   exports: [
     CoreRoutingModule,

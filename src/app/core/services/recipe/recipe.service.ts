@@ -1,5 +1,4 @@
 import { Subject } from 'rxjs';
-import { ShoppingListService } from 'src/app/core/services/shopping-list/shopping-list.service';
 import { Ingredient } from 'src/app/shared/models/ingredient.model';
 import { Recipe } from 'src/app/shared/models/recipe.model';
 
@@ -37,7 +36,6 @@ export class RecipeService {
   ];
 
   constructor(
-    private _shoppingListService: ShoppingListService
   ) {
   }
 
@@ -52,10 +50,6 @@ export class RecipeService {
 
   public getRecipe(id: number): Recipe {
     return this._recipes.find((recipe: Recipe) => recipe.id === id);
-  }
-
-  public addIngredientsToShoppingList(ingredients: Ingredient[]): void {
-    this._shoppingListService.addIngredients(ingredients);
   }
 
   public addRecipe(recipe: Recipe): void {

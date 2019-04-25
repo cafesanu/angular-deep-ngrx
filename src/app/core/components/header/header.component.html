@@ -24,7 +24,7 @@
             >Register</a>
           </li>
         </ng-template>
-        <ng-template [ngIf]="isAuthenticated()">
+        <ng-template [ngIf]="(authState$ | async).authenticated">
           <li>
             <a
               style="cursor: pointer"
@@ -32,7 +32,7 @@
             >Logout</a>
           </li>
         </ng-template>
-        <li class="dropdown" appDropdown *ngIf="isAuthenticated(); else notAuthenticated">
+        <li class="dropdown" appDropdown *ngIf="(authState$ | async).authenticated; else notAuthenticated">
             <a style="cursor: pointer" class="dropdown-toggle" role="button">
               Manage <span class="caret"></span>
             </a>

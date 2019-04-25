@@ -1,11 +1,11 @@
-import { Observable, Subscription } from 'rxjs';
-import { ShoppingListService } from 'src/app/core/services/shopping-list/shopping-list.service';
-import { Ingredient } from 'src/app/shared/models/ingredient.model';
+import { Observable } from 'rxjs';
+import { ICoreState } from 'src/app/core/store/core.reducers';
+import { IShoppingListState } from 'src/app/shopping/store/shopping-list.reducers';
 
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { IShoppingListState } from '../../store/reducers/shopping-list/shopping-list.reducer';
+import { StartEditIngredientAction } from '../../store/shopping-list.actions';
 
 @Component({
   selector: 'app-shopping-list',
@@ -16,10 +16,7 @@ export class ShoppingListComponent implements OnInit {
   public shoppingListState$: Observable<IShoppingListState>;
 
   constructor(
-    private _shoppingListService: ShoppingListService,
-    private _store: Store<{
-      shoppingList: IShoppingListState;
-    }>
+    private _store: Store<ICoreState>
   ) {
   }
 
@@ -28,6 +25,8 @@ export class ShoppingListComponent implements OnInit {
   }
 
   public onEditItem(index: number): void {
-    this._shoppingListService.startedEditing.next(index);
+    this._store.dispatch(new StartEditIngredientAction({
+      index: index
+    }));
   }
 }
