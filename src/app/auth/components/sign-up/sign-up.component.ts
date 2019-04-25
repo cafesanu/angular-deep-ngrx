@@ -1,7 +1,10 @@
-import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { ICoreState } from 'src/app/core/store/core.reducers';
 
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Store } from '@ngrx/store';
+
+import { TrySignUpAction } from '../../store/auth.actions';
 
 interface ISignUpData {
   email: string;
@@ -14,9 +17,8 @@ interface ISignUpData {
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
-
   constructor(
-    private _authService: AuthService
+    private _store: Store<ICoreState>
   ) {
   }
 
@@ -27,7 +29,7 @@ export class SignUpComponent implements OnInit {
     const email: string = (<ISignUpData> form.value).email;
     const password: string = (<ISignUpData> form.value).password;
 
-    this._authService.signUpUser(email, password);
+    this._store.dispatch(new TrySignUpAction({ email, password }));
   }
 
 }

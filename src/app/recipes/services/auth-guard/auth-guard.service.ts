@@ -1,6 +1,5 @@
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { map, take } from 'rxjs/operators';
 import { ICoreState } from 'src/app/core/store/core.reducers';
 
 import { Injectable } from '@angular/core';
@@ -23,6 +22,7 @@ export class AuthGuardService {
   ): Observable<boolean> {
     return this._store.select('auth')
       .pipe(
+        take(1),
         map((authState: IAuthState) => authState.authenticated)
       );
   }

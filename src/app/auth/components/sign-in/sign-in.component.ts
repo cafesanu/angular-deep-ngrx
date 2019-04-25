@@ -1,9 +1,11 @@
-import { AuthService } from 'src/app/core/services/auth/auth.service';
-
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Store } from '@ngrx/store';
 
-interface ISignInData {
+import { ICoreState } from '../../../core/store/core.reducers';
+import { TrySignInAction } from '../../store/auth.actions';
+
+export interface ISignInData {
   email: string;
   password: string;
 }
@@ -15,7 +17,7 @@ interface ISignInData {
 })
 export class SignInComponent implements OnInit {
   constructor(
-    private _authService: AuthService
+    private _store: Store<ICoreState>
   ) { }
 
   public ngOnInit(): void {
@@ -25,7 +27,6 @@ export class SignInComponent implements OnInit {
     const email: string = (<ISignInData> form.value).email;
     const password: string = (<ISignInData> form.value).password;
 
-    this._authService.signInUser(email, password);
+    this._store.dispatch(new TrySignInAction({ email, password }));
   }
-
 }

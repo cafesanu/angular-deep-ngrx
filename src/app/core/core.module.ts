@@ -10,6 +10,8 @@ import { CoreRoutingModule } from './core.routing-module';
 import { AuthInterceptorService } from './services/auth-interceptor/auth-interceptor.service';
 import { LoggingInterceptorService } from './services/logging-interceptor/logging-interceptor.service';
 import { coreReducers } from './store/core.reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './store/auth.effects';
 
 @NgModule({
   declarations: [

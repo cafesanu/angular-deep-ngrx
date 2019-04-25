@@ -6,6 +6,8 @@ import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 
 import { AuthRoutingModule } from './auth.routing-module';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './store/auth.effects';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,8 @@ import { AuthRoutingModule } from './auth.routing-module';
   imports: [
     CommonModule,
     AuthRoutingModule,
-    FormsModule
+    FormsModule,
+    EffectsModule.forRoot([AuthEffects])
   ]
 })
 export class AuthModule { }

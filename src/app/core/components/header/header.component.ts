@@ -1,11 +1,13 @@
+import * as firebase from 'firebase';
 import { Observable } from 'rxjs';
 import { IAuthState } from 'src/app/auth/store/auth.reducers';
-import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
 import { ICoreState } from 'src/app/core/store/core.reducers';
 
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+
+import { LogOutAction } from '../../../auth/store/auth.actions';
 
 @Component({
   selector: 'app-header',
@@ -17,7 +19,6 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private _storageService: StorageService,
-    private _authService: AuthService,
     private _store: Store<ICoreState>
   ) {}
 
@@ -37,6 +38,7 @@ export class HeaderComponent implements OnInit {
   }
 
   public onLogout(): void {
-    this._authService.logout();
+    firebase.auth().signOut();
+    this._store.dispatch(new LogOutAction());
   }
 }

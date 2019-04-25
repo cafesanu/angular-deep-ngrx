@@ -1,8 +1,7 @@
 import { Observable } from 'rxjs';
-import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { Recipe } from 'src/app/shared/models/recipe.model';
 
-import { HttpClient, HttpParams, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { RecipeService } from '../recipe/recipe.service';
@@ -15,8 +14,7 @@ export class StorageService {
 
   constructor(
     private _httpClient: HttpClient,
-    private _recipeService: RecipeService,
-    private _authService: AuthService
+    private _recipeService: RecipeService
   ) { }
 
   public storeRecipes(): Observable<Object> {
