@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
+import { ShoppingListComponent } from '../shopping/components/shopping-list/shopping-list.component';
 import { HomeComponent } from './components/home/home.component';
 import { RecipesGuardService } from './services/recipes-guard/recipes-guard.service';
 
@@ -18,7 +19,7 @@ const routes: Routes = [
   },
   {
     path: 'shopping-list',
-    loadChildren: '../shopping/shopping.module#ShoppingModule'
+    component: ShoppingListComponent
   }
 ];
 

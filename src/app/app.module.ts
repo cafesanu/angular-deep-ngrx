@@ -3,10 +3,8 @@ import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
 import { InitService } from './core/services/init/init.service';
-import { SharedModule } from './shared/shared.module';
 
 export function initializeApp(initService: InitService): () => Promise<void> {
   return (): Promise<void> => {
@@ -20,8 +18,6 @@ export function initializeApp(initService: InitService): () => Promise<void> {
   imports: [ // other modules
     BrowserModule, // common module + additional features only needed when the app starts
     HttpClientModule,
-    AuthModule,
-    SharedModule,
     CoreModule
   ],
   providers: [ // services
